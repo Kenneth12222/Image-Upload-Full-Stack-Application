@@ -1,0 +1,229 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  
+  
+  
+  .logo  {
+    width: 40px;
+    /* height: 45px; */
+    object-fit: contain;
+  }
+  
+  .logo span {
+    font-size: 1.4rem;
+    letter-spacing: 0.2px;
+    font-weight: 600;
+    color: #252629;
+    margin-left: 10px;
+  }
+  
+  .nav-search-container {
+    width: 100%;
+    max-width: 500px;
+    height: 45px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: #f7f7f7;
+    padding: 0px 10px;
+    border-radius: 4px;
+  }
+  
+  .nav-search {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    grid-gap: 10px;
+    width: 100%;
+  }
+  
+  .nav-search input {
+    width: 100%;
+    outline: none;
+    border: none;
+    background: transparent;
+    color: #333;
+  }
+  
+  .nav-search button {
+    color: #555;
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  
+  .nav-search-label {
+    display: flex;
+    align-items: center;
+    border-radius: 1px solid #d8d8d8;
+    padding: 0px 10px;
+    margin-right: 10px;
+    color: #252629;
+  }
+  
+  .nav-search-label span {
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-left: 8px;
+  }
+  
+  .nav-join {
+    background-color: #05a081;
+    max-width: 80px;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  
+  /* Add this to your existing CSS */
+  
+  .navbar ul.open {
+    right: 0;
+  }
+  
+  .navbar ul {
+    /* ... your existing styles ... */
+    transition: right 0.5s ease;
+  }
+  
+  
+  .navbar ul li {
+    list-style: none;
+    display: inline-block;
+  }
+  
+  .navbar ul li a{
+    margin: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+  }
+  
+  /* .menu {
+    width: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: .5s;
+  } */
+  
+  .navbar .fa-times-circle, .fa-bars {
+    font-size: 30px;
+    display: none;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .navbar .fa-times-circle, .fa-bars  {
+        display: block;
+    }
+  
+    .navbar ul{
+        /* background: red; */
+        backdrop-filter: blur(30px);
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 200px;
+        height: 100%;
+        padding-top: 50px;
+        z-index: 2;
+    }
+  
+    .navbar ul li {
+        display: block;
+        margin: 25px;
+    }
+  
+    .navbar ul i{
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        cursor: pointer;
+    }
+  
+    .nav-search-label {
+        display: none;
+    }
+  
+    .nav-search {
+        margin-top: 60px;
+    }
+  }
+
+.logout-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size:1rem;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #0062cc;
+}
+
+.create-form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.create-form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.create-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.create-form input[type="text"],
+.create-form textarea,
+.create-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.create-form input[type="file"] {
+    padding: 6px;
+}
+
+.create-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-form button[type="submit"]:hover {
+    background-color: #45a049;
+}
