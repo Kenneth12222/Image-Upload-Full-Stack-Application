@@ -30,18 +30,23 @@ function Upload(props) {
   }, [imageListRef]);
 
   const uploadImage = () => {
-    if (!image) return; // Check if image is selected
-    const imageName = image.name + uuidv4(); // Generate unique name using uuidv4
-    const imageRef = ref(storage, `images/${imageName}`);
-
-    uploadBytes(imageRef, image)
+    if (!image || image.length === 0) return; // Check if images are selected
+  
+    const uploadPromises = Array.from(image).map((file) => {
+      const imageName = file.name + uuidv4(); // Generate unique name using uuidv4
+      const imageRef = ref(storage, `images/${imageName}`);
+      return uploadBytes(imageRef, file);
+    });
+  
+    Promise.all(uploadPromises)
       .then(() => {
-        console.log('Image uploaded successfully');
+        console.log('Images uploaded successfully');
       })
       .catch((error) => {
-        console.error('Error uploading image:', error);
+        console.error('Error uploading images:', error);
       });
   };
+  
 
   return (
     <div className=''>
@@ -49,7 +54,8 @@ function Upload(props) {
         <label for="image-upload" class="custom-file-upload">
           <i class="fas fa-cloud-upload-alt"></i> Upload Image
         </label>
-        <input type="file" id="image-upload" class="hidden" onChange={(event) => setImage(event.target.files[0])} />
+        <input type="file" id="image-upload" className="hidden" onChange={(event) => setImage(event.target.files)} multiple />
+
         <button type="submit" onClick={uploadImage}>Add</button>
       </div>
 

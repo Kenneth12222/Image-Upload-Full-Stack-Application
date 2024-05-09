@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from './firebase'
 import { toast } from 'react-toastify'
+import { Message } from 'primereact/message';
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -52,6 +54,7 @@ const Login = () => {
             <form className="login-form" onSubmit={handleLogin}>
                 <h2>Login</h2>
                 <div className="form-group">
+                // <Message severity="success" text="Success Message" /> 
                     <input type="email"
                         className="form-control"
                         aria-describedby="emailHelp"
