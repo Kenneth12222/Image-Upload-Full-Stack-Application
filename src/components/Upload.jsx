@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { storage } from './firebase';
-import { ref, listAll, getDownloadURL, uploadBytes } from 'firebase/storage'; // Correct import path
+import { ref, listAll, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
-import './Upload.css'
-
-import './Upload.css'
-import Profile from './Profile';
+import './Upload.css';
 
 function Upload() {
   const [image, setImage] = useState(null);
@@ -22,59 +19,56 @@ function Upload() {
         setImageList(urls);
       } catch (error) {
         console.error("Error fetching images:", error);
+        // Handle error fetching images
       }
     };
 
     fetchImages();
   }, [imageListRef]);
 
-  const uploadImage = () => {
-    if (!image || image.length === 0) return; // Check if images are selected
+  const handleImageChange = (event) => {
+    const selectedFiles = event.target.files;
+    setImage(selectedFiles);
+    uploadImages(selectedFiles);
+  };
 
-    // Add the spin class to the button
-    const button = document.querySelector('button[type="submit"]');
-    button.classList.add('spin');
+  const uploadImages = async (files) => {
+    if (!files || files.length === 0) return; // Check if images are selected
 
-    const uploadPromises = Array.from(image).map((file) => {
-      const imageName = file.name + uuidv4(); // Generate unique name using uuidv4
-      const imageRef = ref(storage, `images/${imageName}`);
-      return uploadBytes(imageRef, file);
-    });
-
-    Promise.all(uploadPromises)
-      .then(() => {
-        console.log('Images uploaded successfully');
-        // Remove the spin class from the button
-        button.classList.remove('spin');
-      })
-      .catch((error) => {
-        console.error('Error uploading images:', error);
-        // Remove the spin class from the button
-        button.classList.remove('spin');
+    try {
+      const uploadPromises = Array.from(files).map((file) => {
+        const imageName = file.name + uuidv4();
+        const imageRef = ref(storage, `images/${imageName}`);
+        return uploadBytes(imageRef, file);
       });
+
+      await Promise.all(uploadPromises);
+      
+      // Clear selected images after successful upload
+      setImage(null);
+    } catch (error) {
+      console.error('Error uploading images:', error);
+      // Handle error uploading images
+    }
   };
 
   return (
-    <div className=''>
-      <div class="image-uploader">
-        <label for="image-upload" class="custom-file-upload">
-          <i class="fas fa-cloud-upload-alt"></i>
+    <div className='upload-container'>
+      <div className="image-uploader">
+        <label htmlFor="image-upload" className="custom-file-upload">
+          <i className="fas fa-cloud-upload-alt"></i> Select Images
         </label>
-        <input type="file" id="image-upload" className="hidden" onChange={(event) => setImage(event.target.files)} multiple />
-<button type="submit" onClick={uploadImage}>Add</button>
+        <input type="file" id="image-upload" className="hidden" onChange={handleImageChange} multiple />
       </div>
 
       <div className="image-container">
-
         <div className='image-gallery'>
-
           {imageList.map((url, index) => (
-            <div className='images'>
+            <div className='images' key={index}>
               <div className='card'>
-                <img key={index} src={url} alt="" />
+                <img src={url} alt="" />
               </div>
             </div>
-
           ))}
         </div>
       </div>
@@ -83,3 +77,4 @@ function Upload() {
 }
 
 export default Upload;
+
