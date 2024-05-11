@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -14,7 +14,7 @@
   padding: 8px 16px;
   border: none;
   border-radius: 5px;
-  background-color: #4267b2;
+  background-color: transparent;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
@@ -56,7 +56,7 @@
 .image-gallery {
   column-count: 6;
   column-width: 240px;
-  column-gap: 10px;
+  column-gap: 2px;
   width: 100%;
   /* background-color: red; */
 }
@@ -64,7 +64,7 @@
 .card {
   display: inline-block;
   width: 100%;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .card img {
@@ -150,7 +150,28 @@
 
   .image-gallery {
     column-count: 2;
-    column-width: 140px;
+    column-width: 120px;
     column-gap: 10px;
   }
+}
+
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.image-uploader button[type="submit"] {
+  /* ... rest of the styles */
+  transition: background-color 0.2s ease;
+  animation: none; /* Remove the animation */
+}
+
+.image-uploader button[type="submit"]:hover {
+  background-color: #3b5998;
+  animation: none; /* Remove the animation */
 }

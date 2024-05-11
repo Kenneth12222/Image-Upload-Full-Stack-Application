@@ -2,16 +2,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 10px 4%;
   }
   
   
   
   
-  .logo  {
-    width: 40px;
+  .logo img {
+    width: 90px;
     /* height: 45px; */
-    object-fit: contain;
   }
   
   .logo span {
@@ -227,3 +226,8 @@
 .create-form button[type="submit"]:hover {
     background-color: #45a049;
 }
+
+ul {
+  position: relative;
+}
+

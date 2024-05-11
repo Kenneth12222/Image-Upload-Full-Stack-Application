@@ -1,16 +1,17 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import './Profile.css';
 import { auth } from './firebase';
 import Upload from './Upload';
+import Logo from './Assets/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-export default function Profile(props) {
+export default function Profile() {
     const navigate = useNavigate();
     const [user, loading, error] = useAuthState(auth);
-    const [imageList, setImageList] = useState([]);
+
     const [menuOpen, setMenuOpen] = useState(false)
 
     const toggleMenu = () => {
@@ -30,26 +31,24 @@ export default function Profile(props) {
     return (
         <>
             {loading ? (
-                <p>Loading...</p>
+                <div className="loading-spinner">
+                    <FontAwesomeIcon icon={faSpinner} spin />
+                    <p>Loading...</p>
+                </div>
             ) : user ? (
                 <div className="profile-container">
                     <div className="navbar">
-                        <div className="logo"></div>
+                        <div className="logo">
+                            <img src={Logo} alt="Logo" />
+                        </div>
                         <ul id='menu' className={menuOpen ? 'open' : ''}>
-            
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/about">About</Link></li>
-                            <li><Link to="">Contact Us</Link></li>
                             <button onClick={handleLogout} className="logout-button">Logout</button>
-
-                            <i class="fas fa-times-circle" id='close' onClick={toggleMenu}></i>
+                            <i className="fas fa-times-circle" id='close' onClick={toggleMenu}></i>
                         </ul>
-                        <i class="fas fa-bars" id='menu-icon' onClick={toggleMenu}></i>
-                        
+                        <i className="fas fa-bars" id='menu-icon' onClick={toggleMenu}></i>
                     </div>
-                    <Upload  />
+                    <Upload />
                 </div>
-                
             ) : (
                 <p>No user signed in</p>
             )}
@@ -57,5 +56,3 @@ export default function Profile(props) {
         </>
     );
 }
-
-
