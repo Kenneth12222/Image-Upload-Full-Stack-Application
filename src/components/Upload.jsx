@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { storage } from './firebase';
 import { ref, listAll, getDownloadURL, uploadBytes } from 'firebase/storage';
@@ -54,12 +56,12 @@ function Upload() {
   };
     
   const handleCardClick = (image) => {
-      setSelectedImage(image)
-  }
-
-  const handleCloseClick = () => {
-      setSelectedImage(null)
-  }
+    setSelectedImage(image);
+  };
+  
+const handleCloseClick = () => {
+    setSelectedImage(null)
+}
 
   return (
     <div className='upload-container'>
@@ -74,12 +76,12 @@ function Upload() {
         <div className='image-gallery'>
         {selectedImage && (
           <div className="overlay" onClick={handleCloseClick}>
-              <div className="zoomed">
-                  <span className="close" onClick={handleCloseClick}>&times;</span>
-                  <img src={selectedImage} alt={menuName} />
-              </div>
+            <div className="zoomed">
+              <span className="close" onClick={handleCloseClick}>&times;</span>
+              <img src={selectedImage} alt="Zoomed Image" />
+            </div>
           </div>
-      )}
+        )}
           {imageList.map((url, index) => (
             <div className='images' key={index}>
               <div className='card'>
@@ -94,4 +96,6 @@ function Upload() {
 }
 
 export default Upload;
+
+
 
