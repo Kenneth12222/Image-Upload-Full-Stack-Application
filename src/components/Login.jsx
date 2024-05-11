@@ -54,7 +54,7 @@ const Login = () => {
             <form className="login-form" onSubmit={handleLogin}>
                 <h2>Login</h2>
                 <div className="form-group">
-                // <Message severity="success" text="Success Message" /> 
+          
                     <input type="email"
                         className="form-control"
                         aria-describedby="emailHelp"
