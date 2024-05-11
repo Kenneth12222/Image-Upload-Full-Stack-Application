@@ -8,6 +8,7 @@ function Upload() {
   const [image, setImage] = useState(null);
   const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "images/");
+  const [selectedImage, setSelectedImage] = useState(null)
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -51,6 +52,14 @@ function Upload() {
       // Handle error uploading images
     }
   };
+    
+  const handleCardClick = (image) => {
+      setSelectedImage(image)
+  }
+
+  const handleCloseClick = () => {
+      setSelectedImage(null)
+  }
 
   return (
     <div className='upload-container'>
@@ -63,6 +72,14 @@ function Upload() {
 
       <div className="image-container">
         <div className='image-gallery'>
+        {selectedImage && (
+          <div className="overlay" onClick={handleCloseClick}>
+              <div className="zoomed">
+                  <span className="close" onClick={handleCloseClick}>&times;</span>
+                  <img src={selectedImage} alt={menuName} />
+              </div>
+          </div>
+      )}
           {imageList.map((url, index) => (
             <div className='images' key={index}>
               <div className='card'>
